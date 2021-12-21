@@ -30,7 +30,7 @@ void test_turn_right() {
    turn_right(&ant);
    assert(ant.direction == UP);
    turn_right(&ant);
-   assert(ant.direction == RIGHT);   
+   assert(ant.direction == RIGHT);
 }
 
 // Test move forward for all 4 directions
@@ -50,7 +50,18 @@ void test_move_forward() {
    ant.direction = DOWN;
    move_forward(&ant);
    assert(ant.x == 5 && ant.y == 5);
+   //TODO: Test on edges
+
+   ant.x = 0;
+   ant.y = 0;
+   ant.direction = LEFT;
+   // assert
+
+   ant.direction = RIGHT;
+   // assert
+   
 }
+
 
 // Test apply rule
 void test_apply_rule() {
@@ -61,10 +72,13 @@ void test_apply_rule() {
    cell c = WHITE;
    apply_rule(&c, &ant);
    assert(ant.direction == DOWN);
+   assert(c == BLACK);
    c = BLACK;
    apply_rule(&c, &ant);
    assert(ant.direction == RIGHT);
+   assert(c == WHITE);
 }
+
 
 
 int main() {

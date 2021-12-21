@@ -1,20 +1,28 @@
 #include <stdlib.h>
 #include "langton.h"
+#include <stdio.h>
+#include <ncurses.h>
 
-// Set the ants direction so that it turns left
+extern int max_y;
+extern int max_x;
+
+// Set the ants direction so that it turns left (anti-clockwise)
 void turn_left(struct ant *ant) {
-	//TODO
+   ant->direction = (ant->direction - 1) % DIRECTION_NUMBER;
 }
 
-// Set the ants direction so that it turns right
+// Set the ants direction so that it turns right (clockwise)
 void turn_right(struct ant *ant) {
-	//TODO
+   ant->direction = (ant->direction + 1) % DIRECTION_NUMBER;
 }
 
 // Actually move the ant forward based on it's current direction
 // Should only be called after turn_left or turn_right
 void move_forward(struct ant *ant) {
-	//TODO
+   int *offset = DIRECTION_OFFSETS[ant->direction];
+   ant->y = (ant->y + offset[0]) % max_y;
+   ant->x = (ant->x + offset[1]) % max_x;
+
 }
 
 // Do not modify
@@ -30,7 +38,21 @@ const char* direction_to_s(enum direction d) {
 // * When at a white square, turn 90° clockwise, flip the color of the square to black and then move forward one unit.
 // * When at a black square, turn 90° counter-clockwise, flip the color of the square to white and then move forward one unit.
 void apply_rule(enum colour *colour, struct ant *ant) {
-	//TODO
+   // First we need to decide whether to turn_right or turn_left
+   (*colour ==  0) ? turn_right(ant) : turn_left(ant);
+   // Then we flip the color -- since there's only two options, we can flip it between WHITE and BLACK
+   *colour = ! *colour;
+   // finally, we move forward
+   move_forward(ant);
+    
+}
+
+void apply_generalized_rule(char **states, struct ant *ant){
+   // we get the ant-color, and determine what state that corresponds to
+
+
+
+   return;
 }
 
 
