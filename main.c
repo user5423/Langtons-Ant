@@ -7,6 +7,9 @@
 // TODO: Do I need to validate input?
 // This includes on a generalized
 
+// TODO: Validate that torous wrap index boundaries are correct
+// Is it meant to be +1? or -1? or what?
+
 int main(int argv, char *argc[]) {
    if (argv == 1){
       return binary_langtons_ant();
@@ -21,28 +24,4 @@ int main(int argv, char *argc[]) {
 
 }
 
-int generalized_langtons_ant(const char *states){
-   // we cannot use enums for cells as these need to be defined at compile time
-   struct ant ant;
-   char *colors;
-   int states_length = strlen(states);
-   generalize_start_visualization(&ant);
-   create_colors(colors, states_length);
-   do {
-      generalize_visualise_and_advance(&ant, states, states_length, colors);
-   } while (not_quit());
-   end_visualisation();
-   return 0;
 
-}
-
-
-int binary_langtons_ant(){
-   struct ant ant;
-   start_visualisation(&ant);
-   do {
-      visualise_and_advance(&ant);
-   } while (not_quit());
-   end_visualisation();
-   return 0;
-}
