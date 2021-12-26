@@ -3,14 +3,16 @@
 
 // This is the old enum definition
 // enum direction { UP, DOWN, LEFT, RIGHT };
+// With the required definitions to lookup for a cleaner operation
+// int direction_clockwise = {3, 2, 0, 1};
+// int direction_anticlockwise = {2, 3, 1, 0};
 
 // This is the new enum definition where the numbers are in clockwise-order
 enum direction {LEFT, UP, RIGHT, DOWN};
 
-
-
 struct ant
 {
+   //TODO: This was meant to be a char for some reason??? Confirm that is correct
    int x;
    int y;
    enum direction direction;

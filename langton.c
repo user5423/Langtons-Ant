@@ -56,10 +56,27 @@ void apply_generalized_rule(int *cell, struct ant *ant, const char *states, int 
    move_forward(ant);
 }
 
+int binary_langtons_ant(){
+   struct ant ant;
+   start_visualisation(&ant);
+   do {
+      visualise_and_advance(&ant);
+   } while (not_quit());
+   end_visualisation();
+   return 0;
+}
 
-   // // we decide whether to turn_right or turn_left
-   // (cell->state == 'L') ? turn_left(ant) : turn_right(ant);
 
-   // // we update the cell with the i+1th color
-   // cell->index = cell->index + 1 % states_length;
-   // cell->state = states[cell->index];
+int generalized_langtons_ant(const char *states){
+   // we cannot use enums for cells as these need to be defined at compile time
+   struct ant ant;
+   char *colors;
+   int states_length = strlen(states);
+   generalize_start_visualization(&ant);
+   create_colors(colors, states_length);
+   do {
+      generalize_visualise_and_advance(&ant, states, states_length, colors);
+   } while (not_quit());
+   end_visualisation();
+   return 0;
+}
