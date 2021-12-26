@@ -20,8 +20,8 @@ void turn_right(struct ant *ant) {
 // Should only be called after turn_left or turn_right
 void move_forward(struct ant *ant) {
    int *offset = DIRECTION_OFFSETS[ant->direction];
-   ant->y = (ant->y + offset[0]) % max_y;
-   ant->x = (ant->x + offset[1]) % max_x;
+   ant->y = normalize_index(ant->y + offset[0], max_y);
+   ant->x = normalize_index(ant->x + offset[1], max_x);
 
 }
 

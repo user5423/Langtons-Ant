@@ -18,6 +18,7 @@ struct ant
 
 #define ant_is_at(y,x) ((y) == ant->y && (x) == ant->x)
 #define gant_is_at(y,x) ((y) == ant->y && (x) == ant->x)
+#define normalize_index(X, UB) ((X >= 0) ? X : UB) % (UB + 1)
 
 enum colour { WHITE, BLACK };
 
