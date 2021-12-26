@@ -17,6 +17,7 @@ struct ant
 };
 
 #define ant_is_at(y,x) ((y) == ant->y && (x) == ant->x)
+#define gant_is_at(y,x) ((y) == ant->y && (x) == ant->x)
 
 enum colour { WHITE, BLACK };
 
@@ -38,6 +39,9 @@ static int DIRECTION_OFFSETS[DIRECTION_NUMBER][DIMENSIONS] = {{0, -1}, {1, 0}, {
 // By allowing the user to change DIMENSION NUMBER, we are able to generalise to different dimensions with minimal code change (the ant struct would need to change)
 
 int binary_langtons_ant();
-int generalized_langtons_ant(char *ruleset);
+int generalized_langtons_ant(const char *ruleset);
+
+// generalized declarations
+void apply_generalized_rule(int *cell, struct ant *ant, const char *states, int state_length);
 
 #endif

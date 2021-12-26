@@ -47,12 +47,19 @@ void apply_rule(enum colour *colour, struct ant *ant) {
     
 }
 
-void apply_generalized_rule(char **states, struct ant *ant){
-   // we get the ant-color, and determine what state that corresponds to
-
-
-
-   return;
+void apply_generalized_rule(int *cell, struct ant *ant, const char *states, int state_length){
+   // decide whether to turn_left or turn_right
+   (states[*cell] == 'L') ? turn_left(ant) : turn_right(ant);
+   // update the cell state
+   *cell = (*cell + 1) % state_length;
+   //we move forward
+   move_forward(ant);
 }
 
 
+   // // we decide whether to turn_right or turn_left
+   // (cell->state == 'L') ? turn_left(ant) : turn_right(ant);
+
+   // // we update the cell with the i+1th color
+   // cell->index = cell->index + 1 % states_length;
+   // cell->state = states[cell->index];
