@@ -1,11 +1,13 @@
 #include <ncurses.h>
 #include <locale.h>
 #include <stdlib.h>
-#include "visualiser.h"
 #include <string.h>
 #include <stdio.h>
+#include "visualiser.h"
+
 #define cell_at(y,x) cells[(y)*max_x + (x)] // Modify for correct boundary behaviour
-#define gcell_at(y,x) gcells[(y)*max_x + (x)] // Modify for correct boundary behaviour
+// these calls should not handle unsanitised values (this isn't good design) -- it is sanitised before any calls are made using normalize_index() macro
+#define gcell_at(y,x) gcells[(y)*max_x + (x)] 
 #define cell_under_ant cell_at(ant->y, ant->x)
 #define gcell_under_ant gcell_at(ant->y, ant->x)
 
@@ -63,9 +65,6 @@ void visualise_and_advance(struct ant* ant) {
 }
 
 void generalize_visualise_and_advance(struct ant* ant, const char *states, int states_length, const char *colors){
-   const char *cell_output;
-   // printf("x: %d\n", ant->x);
-   // printf("y: %d\n", ant->y);
    //Draws cells and ants
    for (int y=0; y<max_y; y++){
       for (int x=0; x<max_x; x++){
@@ -78,13 +77,6 @@ void generalize_visualise_and_advance(struct ant* ant, const char *states, int s
          } else {
             mvprintw(y, x, " ");
          }
-         // mvprintw(y,x,
-         //    gant_is_at(y,x)
-         //       ? direction_to_s(ant->direction)
-         //       : gcell_at(y,x)
-         //       ? "X"
-         //          : " " 
-         // );
       }
    }
    refresh();
@@ -92,12 +84,10 @@ void generalize_visualise_and_advance(struct ant* ant, const char *states, int s
    move_forward(ant);   
 }
 
-
 void create_colors(char *colors, int length){
    // char colors = {"\x1B[0m ", "\x1B[31m ", "\x1B[32m ", "\x1B[33m ", "\x1B[34m ", "\x1B[35m ", "\x1B[36m ", "\x1B[37m "};
    colors = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 }
-
 
 // Check if the user has input "q" to quit
 bool not_quit() {

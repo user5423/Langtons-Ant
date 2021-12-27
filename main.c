@@ -1,14 +1,28 @@
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
-#include "langton.h"
-#include "visualiser.h"
+#include "ant.h"
       
 // TODO: Do I need to validate input?
 // This includes on a generalized
 
 // TODO: Validate that torous wrap index boundaries are correct
 // Is it meant to be +1? or -1? or what?
+
+// TODO: Fix colors (characters)
+// How many "colors" do I need to support
+
+// TODO: Ensure we do not change the original structures (ask what level of change is allowed)
+// --> Ant->x and Ant-y were originally char, moved to int (TODO: Revert or check if mistake)
+// --> Directions enum had the order changed
+
+// TODO: Create tests for generalized functions
+
+// TODO: What should be the starting direction for generalized langtons ant?
+// --> Done for generalized_apply_rule
+
+// TODO: Handle shared library creation
+// --> Makefile reflected changes
+// --> TODO: Find what directory path for .h and .so files to be stored in
 
 int main(int argv, char *argc[]) {
    if (argv == 1){
