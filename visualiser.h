@@ -21,5 +21,5 @@ void generalize_visualise_and_advance(struct ant *ant, const char *states, int s
 void generalize_start_visualization(struct ant *ant);
 void ant_setup(struct ant *ant);
 void screen_start();
-void create_colors(char *colors, int length);
+void create_colors(char **colors, int length);
 #endif

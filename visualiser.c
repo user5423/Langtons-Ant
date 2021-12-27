@@ -68,12 +68,10 @@ void generalize_visualise_and_advance(struct ant* ant, const char *states, int s
    //Draws cells and ants
    for (int y=0; y<max_y; y++){
       for (int x=0; x<max_x; x++){
-         // TODO: Modify this mvprintw, to generalize to n inputs
          if (ant_is_at(y,x)){
             mvprintw(y, x, direction_to_s(ant->direction));
          } else if (gcell_at(y,x)) {
-            mvprintw(y, x, "X");
-            // colors[gcell_at(y, x)]
+            mvprintw(y, x, &colors[gcell_at(y,x)]);
          } else {
             mvprintw(y, x, " ");
          }
@@ -84,9 +82,9 @@ void generalize_visualise_and_advance(struct ant* ant, const char *states, int s
    move_forward(ant);   
 }
 
-void create_colors(char *colors, int length){
+void create_colors(char **colors, int length){
    // char colors = {"\x1B[0m ", "\x1B[31m ", "\x1B[32m ", "\x1B[33m ", "\x1B[34m ", "\x1B[35m ", "\x1B[36m ", "\x1B[37m "};
-   colors = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+   *colors = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 }
 
 // Check if the user has input "q" to quit
