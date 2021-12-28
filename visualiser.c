@@ -1,4 +1,5 @@
-#include <ncurses.h>
+// #include <ncurses.h>
+#include <curses.h>
 #include <locale.h>
 #include <stdlib.h>
 #include <string.h>
@@ -64,14 +65,19 @@ void visualise_and_advance(struct ant* ant) {
       move_forward(ant);
 }
 
-void generalize_visualise_and_advance(struct ant* ant, const char *states, int states_length, const char *colors){
+void generalize_visualise_and_advance(struct ant* ant, const char *states, int states_length){
+   // BUG: 4UL / large characters are fucking up
+
    //Draws cells and ants
    for (int y=0; y<max_y; y++){
       for (int x=0; x<max_x; x++){
          if (ant_is_at(y,x)){
             mvprintw(y, x, direction_to_s(ant->direction));
          } else if (gcell_at(y,x)) {
-            mvprintw(y, x, &colors[gcell_at(y,x)]);
+            // We are using utf-8 chars and starting at +32 "to avoid invisible character start"
+            wchar_t c = (wchar_t) gcell_at(y,x) + 32;
+            //FIXED: Large pixel length chars such as mandarin no longer caussing weird visualisation issues due to v
+            mvaddnwstr(y, x, &c, 1);
          } else {
             mvprintw(y, x, " ");
          }
@@ -82,14 +88,21 @@ void generalize_visualise_and_advance(struct ant* ant, const char *states, int s
    move_forward(ant);   
 }
 
-void create_colors(char **colors, int length){
-   // char colors = {"\x1B[0m ", "\x1B[31m ", "\x1B[32m ", "\x1B[33m ", "\x1B[34m ", "\x1B[35m ", "\x1B[36m ", "\x1B[37m "};
-   *colors = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-}
+// Safe 7-bit ascii (visibile only) implementation for generalized
+// char *create_colors(){
+//    return " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#$%%&'()*+,-./:;<=>?@[\\]^]^_|}~";
+// }
 
 // Check if the user has input "q" to quit
 bool not_quit() {
    return 'q' != getch();
+}
+
+wchar_t getNextChar(){
+   // we need to know how many previous chars have been skipped from this current index
+   // -- we need to skip < > up down
+   // -- we need to skip larger length chars
+   ;
 }
 
 void end_visualisation() {

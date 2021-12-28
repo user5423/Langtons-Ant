@@ -9,7 +9,8 @@ objects = langton.o visualiser.o main.o
 execs = ant.out test.out
 
 ## LLFLAGS are options for compiling files that need to be linked with the library
-LLFLAGS = -Wl,-rpath=.,-lant,-lncurses
+## We are using "ncursesw" for support for unicode characters
+LLFLAGS = -Wl,-rpath=.,-lant,-lncursesw
 ## GFLAGS are general options that are required for multiple reasons
 GFLAGS = -L. -I. -Wall
 

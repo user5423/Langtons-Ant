@@ -17,9 +17,9 @@ cell cell_at_fct(int y, int x);
 void end_visualisation();
 
 // generalized options
-void generalize_visualise_and_advance(struct ant *ant, const char *states, int states_length, const char *colors);
+void generalize_visualise_and_advance(struct ant *ant, const char *states, int states_length);
 void generalize_start_visualization(struct ant *ant);
 void ant_setup(struct ant *ant);
 void screen_start();
-void create_colors(char **colors, int length);
+// char *create_colors(); // Safe implementation using visible 7bit-ascii chars only
 #endif

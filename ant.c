@@ -1,5 +1,5 @@
-#include "ant.h"
 #include <string.h>
+#include "ant.h"
 
 // Runs langtons_ant on the string "LR" with start ant.direction = "RIGHT"
 int binary_langtons_ant(){
@@ -16,12 +16,10 @@ int binary_langtons_ant(){
 int generalized_langtons_ant(const char *states){
    // we cannot use enums for cells as these need to be defined at compile time
    struct ant ant;
-   char *colors;
    int states_length = strlen(states);
-   create_colors(colors, states_length);
    generalize_start_visualization(&ant);
    do {
-      generalize_visualise_and_advance(&ant, states, states_length, colors);
+      generalize_visualise_and_advance(&ant, states, states_length);
    } while (not_quit());
    end_visualisation();
    return 0;
