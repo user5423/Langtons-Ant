@@ -1,5 +1,5 @@
-- Student Name: [insert your name here]
-- Student CIS ID: [insert your CIS ID here]
+- Student Name: Davide Correia
+- Student CIS ID: RLRT51
 
 **Please ask any questions you have about the coursework in the message board under Assessment in LearnUltra. This will be used as a sort of FAQ, i.e. please check if your question has already been answered before posting.**
 
