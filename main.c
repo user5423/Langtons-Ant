@@ -12,17 +12,16 @@
 // --> Ant->x and Ant-y were originally char, moved to int (TODO: Revert or check if mistake)
 // --> Directions enum had the order changed
 
-// TODO: What should be the starting direction for generalized langtons ant?
-// --> Done for generalized_apply_rule
-
 int main(int argv, char *argc[]) {
    if (argv == 1){
+      // Runs langtons_ant on the string "LR" with start ant.direction = "RIGHT"
       return binary_langtons_ant();
    } else if (argv == 2){
-      // This support lengths up to 95 -- we can extend this by adding characters from outside ASCII-7
-      // --> However, no answer has been provided on the length we need to support
+      // Runs langtons_ant on the argument string provided with start ant.direction = "RIGHT"
+      // Uses unicode so should theoretically support around 10million states
       return generalized_langtons_ant(argc[1]);
    } else {
+      // Incorrect number of variables
       printf("Wrong number of arguments -- There are two ways to call this program\n\n");
       printf("\"./main.out\" -- This runs a binary langtons-ant on pre-defined parameters\n");
       printf("\"./main.out (L|R)+\" -- This runs a generalized langtons-ant on the supplied states string\n");
@@ -36,3 +35,5 @@ int main(int argv, char *argc[]) {
 // DONE: Create tests for generalized functions
 // DONE: Validate that torous wrap index boundaries are correct
 // DONE: Handle shared library creation
+
+// DONE-ISH: Left ant->direction as default (what direction are we meant to start?)

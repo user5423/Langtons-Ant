@@ -12,7 +12,7 @@ int binary_langtons_ant(){
    return 0;
 }
 
-// Runs langtons_ant on the argument string provided with start ant.direction = "UP"
+// Runs langtons_ant on the argument string provided with start ant.direction = "RIGHT"
 int generalized_langtons_ant(const char *states){
    // we cannot use enums for cells as these need to be defined at compile time
    struct ant ant;
