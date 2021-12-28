@@ -3,8 +3,7 @@
 #include <assert.h>
 #include <string.h>
 
-#include "langton.h"
-#include "visualiser.h"
+#include "ant.h"
 
 void setup(){
    // Due to how we declare max_x and max_y we need to define them
@@ -47,38 +46,43 @@ void test_move_forward() {
    struct ant ant;
    ant.x = 5;
    ant.y = 5;
-   ant.direction = RIGHT;
 
+   ant.direction = RIGHT;
    move_forward(&ant);
    assert(ant.x == 6 && ant.y == 5);
+
    ant.direction = LEFT;
    move_forward(&ant);
    assert(ant.x == 5 && ant.y == 5);
+
    ant.direction = UP;
    move_forward(&ant);
-   assert(ant.x == 5 && ant.y == 6);
+   assert(ant.x == 5 && ant.y == 4);
+
    ant.direction = DOWN;
    move_forward(&ant);
    assert(ant.x == 5 && ant.y == 5);
-  
 
    // Additional Test Cases: Boundary Test Cases
    ant.x = 0;
    ant.y = 0;
+   // If there are 50rows, and they start at 0, then the last row will have index 49
+   int lastrow = max_y - 1;
+   int lastcol = max_x - 1;
 
    ant.direction = LEFT;
    move_forward(&ant);
-   assert(ant.x == max_x && ant.y == 0);
+   assert(ant.x == lastcol && ant.y == 0);
 
    ant.direction = RIGHT;
    move_forward(&ant);
    assert(ant.x == 0 && ant.y == 0);
 
-   ant.direction = DOWN;
-   move_forward(&ant);
-   assert(ant.x == 0 && ant.y == max_y);
-
    ant.direction = UP;
+   move_forward(&ant);
+   assert(ant.x == 0 && ant.y == lastrow);
+
+   ant.direction = DOWN;
    move_forward(&ant);
    assert(ant.x == 0 && ant.y == 0);
    
@@ -168,6 +172,7 @@ void test_generalized_apply_rule() {
    c = 0;
    apply_generalized_rule(&c, &ant, states, states_length);
    assert(c == 1);
+   
 }
 
 
