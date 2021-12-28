@@ -66,20 +66,18 @@ void visualise_and_advance(struct ant* ant) {
 }
 
 void generalize_visualise_and_advance(struct ant* ant, const char *states, int states_length){
-   // BUG: 4UL / large characters are fucking up
-
    //Draws cells and ants
    for (int y=0; y<max_y; y++){
       for (int x=0; x<max_x; x++){
          if (ant_is_at(y,x)){
-            mvprintw(y, x, direction_to_s(ant->direction));
+            mvaddwstr(y, x, (wchar_t *) direction_to_s(ant->direction));
          } else if (gcell_at(y,x)) {
             // We are using utf-8 chars and starting at +32 "to avoid invisible character start"
             wchar_t c = (wchar_t) gcell_at(y,x) + 32;
-            //FIXED: Large pixel length chars such as mandarin no longer caussing weird visualisation issues due to v
-            mvaddnwstr(y, x, &c, 1);
+            //FIXED: Large pixel length chars such as mandarin no longer caussing weird visualisation issues (fixed by below function)
+            mvaddnwstr(y, x, &c, 2);
          } else {
-            mvprintw(y, x, " ");
+            mvaddwstr(y, x, (wchar_t *) " ");
          }
       }
    }

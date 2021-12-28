@@ -34,8 +34,9 @@ void apply_rule(enum colour *colour, struct ant *ant);
 // My own definitions
 #define DIMENSIONS 2
 #define DIRECTION_NUMBER 4
-// #define normalize_index(X, UB) ((X >= 0) ? X : UB) % (UB + 1)
-#define normalize_index(X, UB) ((X >= 0) ? X : UB-1) % (UB)
+// NOTE: I though this one was correct, but this caused a visualisation issue, so I went with the second one
+// #define normalize_index(X, UB) ((X >= 0) ? X : UB - 1) % (UB)
+#define normalize_index(X, UB) ((X >= 0) ? X : UB) % (UB+1)
 
 // Directions are specified in clockwise order, which allows us to add more movements if we wanted (e.g. LEFTUP, LEFTDOWN, RIGHTUP, RIGHTDOWN for diagonals)
 static char *DIRECTIONS[DIRECTION_NUMBER] = {"LEFT", "UP", "RIGHT", "DOWN"};

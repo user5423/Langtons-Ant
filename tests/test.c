@@ -66,9 +66,11 @@ void test_move_forward() {
    // Additional Test Cases: Boundary Test Cases
    ant.x = 0;
    ant.y = 0;
-   // If there are 50rows, and they start at 0, then the last row will have index 49
-   int lastrow = max_y - 1;
-   int lastcol = max_x - 1;
+   // PREV: If there are 50rows, and they start at 0, then the last row will have index 49
+   // NOTE: However, this thinking results in a visualisation error when wrapping around
+   // FIXED: Therefore returned to 1-based instead of 0 based
+   int lastrow = max_y;
+   int lastcol = max_x;
 
    ant.direction = LEFT;
    move_forward(&ant);

@@ -5,9 +5,6 @@
 // TODO: Do I need to validate input?
 // --> This includes on a generalized
 
-// TODO: Test wrap around visually 
-// --> odd number of rows might mess this up
-
 // TODO: Ensure we do not change the original structures (ask what level of change is allowed)
 // --> Ant->x and Ant-y were originally char, moved to int (TODO: Revert or check if mistake)
 // --> Directions enum had the order changed
@@ -36,4 +33,5 @@ int main(int argv, char *argc[]) {
 // DONE: Validate that torous wrap index boundaries are correct
 // DONE: Handle shared library creation
 
+// FIXED-ISH: Fix the visual wrap-around issue (Changed the normalize_index macro)
 // DONE-ISH: Left ant->direction as default (what direction are we meant to start?)
