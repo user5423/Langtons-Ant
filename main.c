@@ -9,6 +9,8 @@
 // --> Ant->x and Ant-y were originally char, moved to int (TODO: Revert or check if mistake)
 // --> Directions enum had the order changed
 
+// TODO: Review submission requirements and ensure all of them are correct
+
 int main(int argv, char *argc[]) {
    if (argv == 1){
       // Runs langtons_ant on the string "LR" with start ant.direction = "RIGHT"
@@ -34,4 +36,4 @@ int main(int argv, char *argc[]) {
 // DONE: Handle shared library creation
 
 // FIXED-ISH: Fix the visual wrap-around issue (Changed the normalize_index macro)
-// DONE-ISH: Left ant->direction as default (what direction are we meant to start?)
+// DONE-ISH: Let ant->direction use original default "RIGHT" (what direction are we meant to start?)

@@ -18,6 +18,7 @@ int *gcells;
 int max_x;
 int max_y;
 
+// Sets up screen using ncurses
 void screen_setup(){
    setlocale(LC_ALL, "");
    initscr(); // Initializes the library and returns a window object
@@ -26,12 +27,14 @@ void screen_setup(){
    max_y = getmaxy(stdscr); // gets the max height (y) of the window
 }
 
+// Sets up the ant
 void ant_setup(struct ant *ant){
    ant->x = max_x/2; // Sets the ants struct instance default values
    ant->y = max_y/2;
    ant->direction = RIGHT;
 }
 
+// Calls the neccessary functions to setup for other visual function calls (binary version)
 void start_visualisation(struct ant *ant) {
    screen_setup();
    ant_setup(ant);
@@ -45,6 +48,7 @@ void generalize_start_visualization(struct ant *ant){
    gcells = calloc(max_y*max_x, sizeof(int)); // creates a cells memory block
 }
 
+// Updates the screen with the new ant location + direction and all cell states (binary version)
 void visualise_and_advance(struct ant* ant) {
       /* Draw cells and ant */
       for (int y=0; y<max_y; y++){
@@ -65,6 +69,7 @@ void visualise_and_advance(struct ant* ant) {
       move_forward(ant);
 }
 
+// Updates the screen with the new ant location + direction and all cell states (generalized version)
 void generalize_visualise_and_advance(struct ant* ant, const char *states, int states_length){
    //Draws cells and ants
    for (int y=0; y<max_y; y++){
@@ -82,31 +87,25 @@ void generalize_visualise_and_advance(struct ant* ant, const char *states, int s
       }
    }
    refresh();
+
+   /* Advance to next step */
    apply_generalized_rule(&gcell_under_ant, ant, states, states_length);
    move_forward(ant);   
 }
-
-// Safe 7-bit ascii (visibile only) implementation for generalized
-// char *create_colors(){
-//    return " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#$%%&'()*+,-./:;<=>?@[\\]^]^_|}~";
-// }
 
 // Check if the user has input "q" to quit
 bool not_quit() {
    return 'q' != getch();
 }
 
-wchar_t getNextChar(){
-   // we need to know how many previous chars have been skipped from this current index
-   // -- we need to skip < > up down
-   // -- we need to skip larger length chars
-   ;
-}
-
+// Manages releasing resources that were held by the program
 void end_visualisation() {
    free(cells);
    endwin();
 }
 
-
+// Safe 7-bit ascii (visibile only) implementation for generalized
+// char *create_colors(){
+//    return " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#$%%&'()*+,-./:;<=>?@[\\]^]^_|}~";
+// }
 

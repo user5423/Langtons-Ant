@@ -24,7 +24,7 @@ void move_forward(struct ant *ant) {
    ant->x = normalize_index(ant->x + offset[1], max_x);
 }
 
-// Do not modify
+// Maps a direction to its corresponding visual representation
 const char* direction_to_s(enum direction d) {
    return UP   == d ? "^" :
           DOWN == d ? "v" :
@@ -32,7 +32,7 @@ const char* direction_to_s(enum direction d) {
           /* else */  ">" ;
 }
 
-// Call turn_left, or turn_right depending on the color of the current square -- or in other words: apply the rule:
+// Call turn_left, or turn_right depending on the color of the current square -- or in other words: apply the rule: (binary version)
 // * When at a white square, turn 90° clockwise, flip the color of the square to black and then move forward one unit.
 // * When at a black square, turn 90° counter-clockwise, flip the color of the square to white and then move forward one unit.
 void apply_rule(enum colour *colour, struct ant *ant) {
@@ -41,6 +41,7 @@ void apply_rule(enum colour *colour, struct ant *ant) {
    move_forward(ant); // Moves ant forward
 }
 
+// Generalized version of "apply_rule" -- This instead uses a user defined string (generalized version)
 void apply_generalized_rule(int *cell, struct ant *ant, const char *states, int state_length){
    (states[*cell] == 'L') ? turn_left(ant) : turn_right(ant); // Decides ant->direction based on the cell's color
    *cell = (*cell + 1) % state_length; // Updates the cell's state to the next one
