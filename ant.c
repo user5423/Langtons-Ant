@@ -24,3 +24,15 @@ int generalized_langtons_ant(const char *states){
    end_visualisation();
    return 0;
 }
+
+
+int validate_input(const char *input){
+   char c;
+   for (int i = 0; (c = input[i]) != '\0'; i++){
+      if (c != 'L' && c != 'R'){
+         printf("The required input argument must be composed of capital L's and R's only e.g. (L|R)+");
+         return -1;
+      }
+   }
+   return 0;
+}
