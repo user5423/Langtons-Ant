@@ -5,8 +5,8 @@ CFLAGS = -fPIC $(general_flags)
 VPATH = ./tests
 
 library = libant.so
-objects = langton.o visualiser.o main.o
 execs = ant.out test.out
+objects = langton.o visualiser.o main.o
 
 ## LLFLAGS are options for compiling files that need to be linked with the library
 ## We are using "ncursesw" for support for unicode characters
@@ -33,8 +33,8 @@ langton.o: langton.c langton.h
 # langton.h is included in visualiser.h
 visualiser.o: visualiser.c visualiser.h langton.h
 
-clean: clean-executables clean-objectfiles clean-precompiled-headers clean-dylibraries## clean-dependencies
-clean-executables: ; rm -f $(execs) *.out
+clean: clean-executables clean-objectfiles clean-precompiled-headers clean-dylibraries
+clean-executables: ; rm -f $(execs) *.out ant
 clean-objectfiles: ; rm -f $(objects) *.o
 clean-precompiled-headers: ; rm -f *.gch
 clean-dylibraries: ; rm -f $(library) *.so
