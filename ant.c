@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 #include "ant.h"
 
 // Runs langtons_ant on the string "LR" with start ant.direction = "RIGHT"
