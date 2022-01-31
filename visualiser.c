@@ -72,10 +72,13 @@ void visualise_and_advance(struct ant* ant) {
 // Updates the screen with the new ant location + direction and all cell states (generalized version)
 void generalize_visualise_and_advance(struct ant* ant, const char *states, int states_length){
    //Draws cells and ants
+   wchar_t dir_wchar;
+
    for (int y=0; y<max_y; y++){
       for (int x=0; x<max_x; x++){
          if (ant_is_at(y,x)){
-            mvaddwstr(y, x, (wchar_t *) direction_to_s(ant->direction));
+            dir_wchar = (wchar_t) *direction_to_s(ant->direction);
+            mvaddnwstr(y, x, &dir_wchar, 3);
          } else if (gcell_at(y,x)) {
             // We are using utf-8 chars and starting at +32 "to avoid invisible character start"
             wchar_t c = (wchar_t) gcell_at(y,x) + 32;

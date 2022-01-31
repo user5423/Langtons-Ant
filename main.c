@@ -3,6 +3,8 @@
 #include "ant.h"
       
 // TODO: Review submission requirements and ensure all of them are correct
+// BUG: When the genearlized langton's ant is called on single input size word len(word) = 1, it fails to output
+// BUG: The chevron's are NOT shown during the generalized langtons ant
 
 int main(int argv, char *argc[]) {
    if (argv == 1){
