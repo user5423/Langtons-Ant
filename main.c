@@ -3,8 +3,6 @@
 #include "ant.h"
       
 // TODO: Review submission requirements and ensure all of them are correct
-// BUG: When the genearlized langton's ant is called on single input size word len(word) = 1, it fails to output
-// BUG: The chevron's are NOT shown during the generalized langtons ant
 
 int main(int argv, char *argc[]) {
    if (argv == 1){
@@ -32,6 +30,6 @@ int main(int argv, char *argc[]) {
 // DONE: Create tests for generalized functions
 // DONE: Validate that torous wrap index boundaries are correct
 // DONE: Handle shared library creation
-
+// FIXED: The generalized langton ant wouldn't display the direction (denoted by the <,>,v,^)
 // FIXED: Fix the visual wrap-around issue (Changed the normalize_index macro)
 // DONE: Let ant->direction use original default "RIGHT" (what direction are we meant to start?)
